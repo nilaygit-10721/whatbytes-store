@@ -4,21 +4,18 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ShoppingCart, Search } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
-import { useCallback, useState, useEffect } from "react";
+import { useCallback, useState } from "react";
 
 export default function Header() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const totalItems = useCartStore((state) => state.totalItems);
+  // Subscribe to items directly so the badge re-renders on every cart change
+  const cartCount = useCartStore((state) =>
+    state.items.reduce((sum, item) => sum + item.quantity, 0)
+  );
   const [searchValue, setSearchValue] = useState(
     searchParams.get("search") || ""
   );
-  const [cartCount, setCartCount] = useState(0);
-
-  // Sync cart count after hydration to avoid SSR mismatch
-  useEffect(() => {
-    setCartCount(totalItems());
-  }, [totalItems]);
 
   const handleSearch = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
