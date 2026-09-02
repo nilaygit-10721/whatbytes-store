@@ -4,7 +4,7 @@ A modern e-commerce product listing application built as part of the WhatBytes F
 
 ## 🔗 Live Demo
 
-> **[https://whatbyte-store.vercel.app](https://whatbyte-store.vercel.app)**
+> **[https://whatbyte-store.vercel.app](https://whatbytes-store-ten.vercel.app/)**
 > *(Update this URL after deploying to Vercel)*
 
 ## ✨ Features
