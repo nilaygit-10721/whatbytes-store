@@ -13,9 +13,7 @@ interface SidebarProps {
 export default function Sidebar({ filters, setFilter, clearFilters }: SidebarProps) {
   return (
     <aside className="flex flex-col gap-4 w-full">
-      {/* ── Filter Card 1: Category + Price ── */}
       <div className="rounded-lg overflow-hidden shadow-sm">
-        {/* Card header */}
         <div
           className="flex items-center gap-2 px-4 py-3"
           style={{ backgroundColor: "var(--primary)" }}
@@ -24,37 +22,35 @@ export default function Sidebar({ filters, setFilter, clearFilters }: SidebarPro
           <h2 className="text-white font-semibold text-sm">Filters</h2>
         </div>
 
-        {/* Card body */}
         <div className="bg-white px-4 py-4 space-y-5">
-          {/* Category */}
           <div>
             <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">
               Category
             </h3>
-            <div className="flex flex-wrap gap-2">
+            <div className="space-y-2">
               {categories.map((cat) => (
-                <button
+                <label
                   key={cat}
+                  className="flex items-center gap-2 cursor-pointer group"
                   id={`filter-category-${cat.toLowerCase()}`}
-                  onClick={() => setFilter("category", cat)}
-                  className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-all duration-200 cursor-pointer ${
-                    filters.category === cat
-                      ? "text-white border-transparent shadow-sm"
-                      : "text-gray-600 border-gray-200 bg-white hover:border-blue-300 hover:text-blue-700"
-                  }`}
-                  style={
-                    filters.category === cat
-                      ? { backgroundColor: "var(--primary)" }
-                      : undefined
-                  }
                 >
-                  {cat}
-                </button>
+                  <input
+                    type="radio"
+                    name="category"
+                    value={cat}
+                    checked={filters.category === cat}
+                    onChange={() => setFilter("category", cat)}
+                    className="w-4 h-4 cursor-pointer"
+                    style={{ accentColor: "var(--primary)" }}
+                  />
+                  <span className="text-sm text-gray-700 group-hover:text-blue-700 transition-colors">
+                    {cat}
+                  </span>
+                </label>
               ))}
             </div>
           </div>
 
-          {/* Price Range */}
           <div>
             <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">
               Price
@@ -78,9 +74,7 @@ export default function Sidebar({ filters, setFilter, clearFilters }: SidebarPro
         </div>
       </div>
 
-      {/* ── Filter Card 2: Brand + Price input ── */}
       <div className="rounded-lg overflow-hidden shadow-sm">
-        {/* Card header */}
         <div
           className="flex items-center gap-2 px-4 py-3"
           style={{ backgroundColor: "var(--primary)" }}
@@ -88,9 +82,7 @@ export default function Sidebar({ filters, setFilter, clearFilters }: SidebarPro
           <h2 className="text-white font-semibold text-sm">Brand</h2>
         </div>
 
-        {/* Card body */}
         <div className="bg-white px-4 py-4 space-y-5">
-          {/* Brand radios */}
           <div>
             <div className="space-y-2">
               {brands.map((brand) => (
@@ -116,7 +108,6 @@ export default function Sidebar({ filters, setFilter, clearFilters }: SidebarPro
             </div>
           </div>
 
-          {/* Max price number input */}
           <div>
             <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">
               Max Price ($)
@@ -133,7 +124,6 @@ export default function Sidebar({ filters, setFilter, clearFilters }: SidebarPro
             />
           </div>
 
-          {/* Clear filters */}
           {(filters.category !== "All" ||
             filters.maxPrice !== 1000 ||
             filters.brand !== "All" ||

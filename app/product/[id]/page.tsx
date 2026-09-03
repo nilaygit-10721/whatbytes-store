@@ -194,7 +194,10 @@ export default function ProductDetailPage() {
               comment: "Solid build quality. Exactly as described.",
             },
           ].map((review, i) => (
-            <div key={i} className="border-b border-gray-100 last:border-0 pb-4 last:pb-0">
+            <div
+              key={i}
+              className="border-b border-gray-100 last:border-0 pb-4 last:pb-0"
+            >
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-sm font-semibold text-gray-800">
                   {review.name}

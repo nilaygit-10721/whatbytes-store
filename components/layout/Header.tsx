@@ -11,10 +11,10 @@ export default function Header() {
   const searchParams = useSearchParams();
   // Subscribe to items directly so the badge re-renders on every cart change
   const cartCount = useCartStore((state) =>
-    state.items.reduce((sum, item) => sum + item.quantity, 0)
+    state.items.reduce((sum, item) => sum + item.quantity, 0),
   );
   const [searchValue, setSearchValue] = useState(
-    searchParams.get("search") || ""
+    searchParams.get("search") || "",
   );
 
   const handleSearch = useCallback(
@@ -29,7 +29,7 @@ export default function Header() {
       }
       router.push(`/?${params.toString()}`, { scroll: false });
     },
-    [router, searchParams]
+    [router, searchParams],
   );
 
   return (

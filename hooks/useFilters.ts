@@ -41,7 +41,7 @@ export function useFilters() {
       }
       router.push(`/?${params.toString()}`, { scroll: false });
     },
-    [router, searchParams]
+    [router, searchParams],
   );
 
   const clearFilters = useCallback(() => {
@@ -53,12 +53,13 @@ export function useFilters() {
       const matchCategory =
         filters.category === "All" || product.category === filters.category;
       const matchPrice =
-        product.price >= filters.minPrice &&
-        product.price <= filters.maxPrice;
+        product.price >= filters.minPrice && product.price <= filters.maxPrice;
       const matchSearch =
         filters.search === "" ||
         product.title.toLowerCase().includes(filters.search.toLowerCase()) ||
-        product.description.toLowerCase().includes(filters.search.toLowerCase()) ||
+        product.description
+          .toLowerCase()
+          .includes(filters.search.toLowerCase()) ||
         product.category.toLowerCase().includes(filters.search.toLowerCase());
       const matchBrand =
         filters.brand === "All" || product.brand === filters.brand;
