@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ShoppingCart, Check } from "lucide-react";
+import { ShoppingCart, Check, Minus, Plus } from "lucide-react";
 import { useState } from "react";
 import { Product } from "@/types";
 import { useCartStore } from "@/store/cartStore";
@@ -13,15 +13,21 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const items = useCartStore((state) => state.items);
+  const cartItem = items.find((item) => item.product.id === product.id);
   const addItem = useCartStore((state) => state.addItem);
-  const [added, setAdded] = useState(false);
+  const updateQuantity = useCartStore((state) => state.updateQuantity);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     addItem(product);
-    setAdded(true);
-    setTimeout(() => setAdded(false), 1500);
+  };
+
+  const handleUpdateQuantity = (e: React.MouseEvent, newQuantity: number) => {
+    e.preventDefault();
+    e.stopPropagation();
+    updateQuantity(product.id, newQuantity);
   };
 
   return (
@@ -55,27 +61,42 @@ export default function ProductCard({ product }: ProductCardProps) {
           ${product.price}
         </p>
 
-        {/* Add to Cart button */}
-        <button
-          id={`add-to-cart-${product.id}`}
-          onClick={handleAddToCart}
-          className="mt-auto w-full flex items-center justify-center gap-2 py-2 px-3 rounded-md text-white text-sm font-medium transition-all duration-200 active:scale-95"
-          style={{
-            backgroundColor: added ? "#16a34a" : "var(--primary)",
-          }}
-        >
-          {added ? (
-            <>
-              <Check size={14} />
-              Added!
-            </>
-          ) : (
-            <>
-              <ShoppingCart size={14} />
-              Add to Cart
-            </>
-          )}
-        </button>
+        {/* Add to Cart button or Quantity Selector */}
+        {cartItem ? (
+          <div
+            className="mt-auto w-full flex items-center justify-between border border-blue-600 rounded-md bg-white overflow-hidden"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+            }}
+          >
+            <button
+              onClick={(e) => handleUpdateQuantity(e, cartItem.quantity - 1)}
+              className="px-3 py-2 text-blue-600 hover:bg-blue-50 transition-colors"
+            >
+              <Minus size={14} />
+            </button>
+            <span className="px-2 py-2 text-sm font-semibold text-gray-800 text-center flex-1">
+              {cartItem.quantity}
+            </span>
+            <button
+              onClick={(e) => handleUpdateQuantity(e, cartItem.quantity + 1)}
+              className="px-3 py-2 text-blue-600 hover:bg-blue-50 transition-colors"
+            >
+              <Plus size={14} />
+            </button>
+          </div>
+        ) : (
+          <button
+            id={`add-to-cart-${product.id}`}
+            onClick={handleAddToCart}
+            className="mt-auto w-full flex items-center justify-center gap-2 py-2 px-3 rounded-md text-white text-sm font-medium transition-all duration-200 active:scale-95"
+            style={{ backgroundColor: "var(--primary)" }}
+          >
+            <ShoppingCart size={14} />
+            Add to Cart
+          </button>
+        )}
       </div>
     </Link>
   );
