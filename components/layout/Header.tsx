@@ -44,7 +44,7 @@ export default function Header() {
           className="text-white text-2xl font-bold tracking-tight shrink-0 hover:opacity-90"
           id="logo-link"
         >
-          Logo
+          whatbytes
         </Link>
 
         {/* Search bar */}
