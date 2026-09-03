@@ -31,26 +31,25 @@ export default function Sidebar({ filters, setFilter, clearFilters }: SidebarPro
             <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">
               Category
             </h3>
-            <div className="space-y-2">
+            <div className="flex flex-wrap gap-2">
               {categories.map((cat) => (
-                <label
+                <button
                   key={cat}
-                  className="flex items-center gap-2 cursor-pointer group"
                   id={`filter-category-${cat.toLowerCase()}`}
+                  onClick={() => setFilter("category", cat)}
+                  className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-all duration-200 cursor-pointer ${
+                    filters.category === cat
+                      ? "text-white border-transparent shadow-sm"
+                      : "text-gray-600 border-gray-200 bg-white hover:border-blue-300 hover:text-blue-700"
+                  }`}
+                  style={
+                    filters.category === cat
+                      ? { backgroundColor: "var(--primary)" }
+                      : undefined
+                  }
                 >
-                  <input
-                    type="radio"
-                    name="category"
-                    value={cat}
-                    checked={filters.category === cat}
-                    onChange={() => setFilter("category", cat)}
-                    className="w-4 h-4 cursor-pointer"
-                    style={{ accentColor: "var(--primary)" }}
-                  />
-                  <span className="text-sm text-gray-700 group-hover:text-blue-700 transition-colors">
-                    {cat}
-                  </span>
-                </label>
+                  {cat}
+                </button>
               ))}
             </div>
           </div>

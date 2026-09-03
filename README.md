@@ -23,7 +23,7 @@ A modern e-commerce product listing application built as part of the WhatBytes F
 
 | Layer | Technology |
 |---|---|
-| Framework | Next.js 14 (App Router) |
+| Framework | Next.js 16 (App Router) |
 | Language | TypeScript |
 | Styling | Tailwind CSS |
 | State Management | Zustand (with localStorage persistence) |
@@ -64,10 +64,14 @@ whatbyte-store/
     └── index.ts             # TypeScript interfaces
 ```
 
+## 🏗 Architecture
+
+![WhatBytes Store Architecture](./public/architecture.jpg)
+
 ## 🚀 Getting Started
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/whatbyte-store.git
+git clone https://github.com/nilaygit-10721/whatbytes-store.git
 cd whatbyte-store
 npm install
 npm run dev
@@ -75,20 +79,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## 📝 Commit Strategy
-
-1. `init: setup Next.js 14 with Tailwind CSS and dependencies`
-2. `feat: add static product data and TypeScript types`
-3. `feat: implement header and footer components`
-4. `feat: add Zustand cart store with localStorage persistence`
-5. `feat: build product card and product grid components`
-6. `feat: implement sidebar with category, price, and brand filters`
-7. `feat: add URL-based filter logic and search functionality`
-8. `feat: build product detail page with quantity selector`
-9. `feat: implement cart page with quantity controls and price summary`
-10. `feat: add empty states, conditional rendering, and polish`
-11. `docs: add README with deployment URL and project description`
-
 ---
 
-Built with Next.js 14 + Tailwind CSS + Zustand.
+Built with Next.js 16 + Tailwind CSS + Zustand.
+
